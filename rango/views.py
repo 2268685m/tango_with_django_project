@@ -231,13 +231,11 @@ def user_login(request):
             context_dict = {}
         
             if User.objects.filter(username=username).exists():
-                context_dict['invalid_password'] = "Invalid Password"
+                context_dict['invalid_password'] = "Invalid password"
                 # Keeps the entered username in the field for next attempt.
                 context_dict['entered_username'] = username
-                print("User exists!!")
             else:
-                context_dict['invalid_username'] = "User not registered"
-                print("User DOES NOT exists!!")
+                context_dict['invalid_username'] = "User, " , username, ", does not exist."
                       
             return render(request, 'rango/login.html', context_dict)
    
@@ -276,13 +274,13 @@ def visitor_cookie_handler(request):
     last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
     
     # If it's been more than a day since the last visit...
-    if (datetime.now() - last_visit_time).seconds > 0:
+    if (datetime.now() - last_visit_time).days > 0:
         visits = visits + 1
         #update the last visit cookie now that we have updated the count
         request.session['last_visit'] = str(datetime.now())
     else:
         # BUG: Does this not override the acutal value for visits and sets it always to 1 ?
-        # visits = 1
+        visits = 1
         # set the last visit cookie
         request.session['last_visit'] = last_visit_cookie
     

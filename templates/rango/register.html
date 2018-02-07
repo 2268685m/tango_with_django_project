@@ -11,8 +11,9 @@
 		Rango says: <strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br />
 	{% else %}
-		Rango says: <strong>register here!</strong>
-			<form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data"> <!-- enctype: ensures large files(picture) is transmitted in multiple packages. -->
+		Rango says: <strong>register here!</strong><br />
+			<form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+			<!-- enctype: ensures large files(picture) is transmitted in multiple packages. -->
 			
 			{% csrf_token %}
 		
