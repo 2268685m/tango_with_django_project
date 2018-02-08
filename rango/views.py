@@ -279,8 +279,6 @@ def visitor_cookie_handler(request):
         #update the last visit cookie now that we have updated the count
         request.session['last_visit'] = str(datetime.now())
     else:
-        # BUG: Does this not override the acutal value for visits and sets it always to 1 ?
-        visits = 1
         # set the last visit cookie
         request.session['last_visit'] = last_visit_cookie
     
